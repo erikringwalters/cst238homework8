@@ -135,11 +135,14 @@ void LinkedList::checkSubstrings()
 {
 	Node * predPtr = first;
 	Node * ptr = predPtr;
-	string AtoB;
+	const int size = mySize;
+	string substring[1000];
 	bool isThereAnA;
 	//while (isThereAnA == true) {}
+	int i = 0;
 	while (ptr != NULL)
 	{
+
 		if (ptr->data == 'A')
 		{
 			while (ptr != NULL)
@@ -147,16 +150,21 @@ void LinkedList::checkSubstrings()
 				ptr = ptr->next;
 				if (ptr->data != 'B')
 				{
-					AtoB += ptr->data;
+					substring[i] += ptr->data;
 					ptr = ptr->next;
 				}
 				else
 				{
-					AtoB += ptr->data;
-					cout << AtoB;
+					substring[i] += ptr->data;
+					cout << substring[i];
+					i++;
 					break;
 				}
 			}
+		}
+		else
+		{
+			ptr = ptr->next;
 		}
 	}
 }
