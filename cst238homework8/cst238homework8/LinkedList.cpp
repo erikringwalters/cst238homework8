@@ -134,63 +134,37 @@ void LinkedList::display(ostream & out) const
 //-- Definition of checkSubstrings()
 void LinkedList::checkSubstrings()
 {
-	Node * predPtr = first;
-	Node * ptr = first;
-	const int size = mySize;
-	string substring[1000];
-	string tempSubstring;
-	bool isThereAnA = false;
-	//while (isThereAnA == true) {}
-	int i = 0;
-	while (ptr != NULL)
+	Node * aPtr = first;//this pointer is used for holding an A's position
+	Node * bPtr = first;//This is used for holding a B's position
+	Node * cPtr = first;//This is used to add the characters to the substring once a valid substring is found
+	const int CAPACITY = 1000;//just to be safe
+	string substring[CAPACITY] = { "" };
+	int i = 0;//increases substring[i];
+	while (aPtr != NULL)
 	{
-		if (ptr->data == 'A')
+		if (aPtr->data == 'A')
 		{
-			isThereAnA = true;
-			while (isThereAnA = true)
-			{
-				cout << "found an A\n";
-				predPtr = ptr;
-				substring[i] = ptr->data;
-				ptr = ptr->next;
-			continuingString:
-				if (ptr->data != 'B' || ptr->data != NULL)
+			bPtr = aPtr;//Once an A is found, the B pointer is put int the same position as A
+			while (bPtr != NULL)//until its out of bounds
+			{			
+				if (bPtr->data == 'B')//Until it finds a B
 				{
-					substring[i] += ptr->data;
-					ptr = ptr->next;
-				}
-				if (ptr->data == 'B')
-				{
-					cout << "Found a B\n";
-					//gotta check whether this string already exists
-					for (int q = 1; q < i; q++)
+					for (cPtr = aPtr; cPtr != bPtr->next; cPtr = cPtr->next)//<3
+						//So the recorder pointer (cPtr) starts where the A is and goes until it reaches where the B is.
 					{
-						if (substring[i] == substring[q])
-						{
-							//want to start the while loop over
-							ptr = ptr->next;
-							goto continuingString;
-						}
-						else
-						{
-							cout << "Substring " << i << ": " << substring[i] << endl;
-						}
+						substring[i] += cPtr->data;//adds the data (character) to the substring[i]
 					}
+					i++;//once this ^^^ substring is complete, starts a new one using i
 				}
-				if (ptr->data == NULL)
-				{
-					substring[i] = "";
-					i++;
-					ptr = first;
-					isThereAnA = false;
-					continue;
-				}
+				bPtr = bPtr->next;//bPtr increases in order to find any other B's
 			}
 		}
-		else
-		{
-			ptr = ptr->next;
-		}
+		aPtr = aPtr->next;//A's pointer increases once it knows there are no more B's to find.
+	}
+	for (int q = 0; q < i; q++)
+	{
+		cout << "Substring " << q << ": " << substring[q] << endl;//prints out all substrings.
 	}
 	return;
+	
 }
