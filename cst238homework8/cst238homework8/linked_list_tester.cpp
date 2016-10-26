@@ -1,3 +1,9 @@
+//Erik Ring-Walters
+//10/26/2016
+//Homework 8 CST - 238
+//Linked List Homework
+//A to B substring recorder
+//ID: 00248407
 #include <iostream>
 using namespace std;
 #include "LinkedList.h"

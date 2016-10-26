@@ -1,3 +1,9 @@
+//Erik Ring-Walters
+//10/26/2016
+//Homework 8 CST - 238
+//Linked List Homework
+//A to B substring recorder
+//ID: 00248407
 #include <iostream>
 using namespace std;
 
@@ -163,8 +169,9 @@ void LinkedList::checkSubstrings()
 	}
 	for (int q = 0; q < i; q++)
 	{
-		cout << "Substring " << q << ": " << substring[q] << endl;//prints out all substrings.
+		cout << "Substring " << q+1 << ": " << substring[q] << endl;//prints out all substrings.
 	}
+	cout << "Total substrings: " << i << endl;
 	return;
 	
 }
