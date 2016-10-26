@@ -131,34 +131,59 @@ void LinkedList::display(ostream & out) const
 	}
 }
 
+//-- Definition of checkSubstrings()
 void LinkedList::checkSubstrings()
 {
 	Node * predPtr = first;
-	Node * ptr = predPtr;
+	Node * ptr = first;
 	const int size = mySize;
 	string substring[1000];
-	bool isThereAnA;
+	string tempSubstring;
+	bool isThereAnA = false;
 	//while (isThereAnA == true) {}
 	int i = 0;
 	while (ptr != NULL)
 	{
-
 		if (ptr->data == 'A')
 		{
-			while (ptr != NULL)
+			isThereAnA = true;
+			while (isThereAnA = true)
 			{
+				cout << "found an A\n";
+				predPtr = ptr;
+				substring[i] = ptr->data;
 				ptr = ptr->next;
-				if (ptr->data != 'B')
+			continuingString:
+				if (ptr->data != 'B' || ptr->data != NULL)
 				{
 					substring[i] += ptr->data;
 					ptr = ptr->next;
 				}
-				else
+				if (ptr->data == 'B')
 				{
-					substring[i] += ptr->data;
-					cout << substring[i];
+					cout << "Found a B\n";
+					//gotta check whether this string already exists
+					for (int q = 1; q < i; q++)
+					{
+						if (substring[i] == substring[q])
+						{
+							//want to start the while loop over
+							ptr = ptr->next;
+							goto continuingString;
+						}
+						else
+						{
+							cout << "Substring " << i << ": " << substring[i] << endl;
+						}
+					}
+				}
+				if (ptr->data == NULL)
+				{
+					substring[i] = "";
 					i++;
-					break;
+					ptr = first;
+					isThereAnA = false;
+					continue;
 				}
 			}
 		}
@@ -167,4 +192,5 @@ void LinkedList::checkSubstrings()
 			ptr = ptr->next;
 		}
 	}
+	return;
 }
